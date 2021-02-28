@@ -1,0 +1,56 @@
+<?xml version='1.0' ?>
+<robot name="mrm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
+    <xacro:include filename="$(find mrm_description)/urdf/links_joints.xacro" />
+    <xacro:include filename="$(find mrm_description)/urdf/robot_parameters.xacro" />
+
+   <m_link_box name="${link_00_name}"
+              origin_rpy="0 0 0" origin_xyz="0 0 0"
+              mass="1024"
+              ixx="170.667" ixy="0" ixz="0"
+              iyy="170.667" iyz="0"
+              izz="170.667"
+              size="1 2 2" />
+
+    <m_joint name="${link_00_name}__${link_01_name}" type="revolute" axis_xyz="0 1 0" origin_rpy="0 0 0" 
+    origin_xyz="0 1 0" parent="${link_00_name}" child="${link_01_name}" limit_e="1000.0" limit_l="0" 
+    limit_u="3.14" limit_v="0.5" />
+
+     <m_link_cylinder name="${link_01_name}"
+              origin_rpy="1.57 0 0" origin_xyz="0 0.4 0"
+              radius="0.25" length="0.8"
+              mass="157.633"
+              ixx="13.235" ixy="0" ixz="0"
+              iyy="13.235" iyz="0"
+              izz="9.655" />
+
+    <m_joint name="${link_01_name}__${link_02_name}" type="revolute" axis_xyz="1 0 0" origin_rpy="0 0 0" 
+    origin_xyz="0 0.8 0" parent="${link_01_name}" child="${link_02_name}" limit_e="1000.0" limit_l="-1.57" 
+    limit_u="1.57" limit_v="0.5" />
+    
+   <m_link_cylinder name="${link_02_name}"
+              origin_rpy="1.57 0 0" origin_xyz="0 0.5 0"
+              radius="0.2" length="1.0"
+              mass="57.906"
+              ixx="12.679" ixy="0" ixz="0"
+              iyy="12.679" iyz="0"
+              izz="0.651" />
+
+    <m_joint name="${link_02_name}__${link_03_name}" type="revolute" axis_xyz="1 0 0" origin_rpy="0 0 0" 
+    origin_xyz="0 1.0 0" parent="${link_02_name}" child="${link_03_name}" limit_e="1000.0" limit_l="-1.57" 
+    limit_u="1.57" limit_v="0.5" />
+
+     <m_link_cylinder name="${link_03_name}"
+              origin_rpy="1.57 0 0" origin_xyz="0 0.25 0"
+              mass="57.906"
+              ixx="12.679" ixy="0" ixz="0"
+              iyy="12.679" iyz="0"
+              izz="0.651"
+              radius="0.15" length="0.5" />
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    </plugin>
+  </gazebo>
+
+</robot>
